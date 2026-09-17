@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>윤시우 | Hanshin AI·SW Portfolio</title>
+  
+  <!-- 구글 폰트: 나눔고딕 (Nanum Gothic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 아이콘 (상업적 이용 가능 무상 CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ==========================================
+       1. 변수 지정 및 기본 스타일 설정
+       ========================================== */
+    :root {
+      --primary-gradient: linear-gradient(135deg, #FF007A 0%, #7E00FF 50%, #00F0FF 100%);
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --text-main: #222222;
+      --text-sub: #555555;
+      --accent-color: #7E00FF;
+      --bg-color: #F8FAFC;
+      --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 30px rgba(126, 0, 255, 0.15);
+      --border-radius: 20px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Nanum Gothic', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ==========================================
+       2. 네비게이션 바 (상단 고정 & 글래스모피즘)
+       ========================================== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 700;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    /* ==========================================
+       3. 메인 히어로 섹션
+       ========================================== */
+    .hero {
+      padding: 140px 1.5rem 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 85vh;
+      gap: 2rem;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: linear-gradient(135deg, rgba(255, 0, 122, 0.1), rgba(126, 0, 255, 0.1));
+      color: var(--accent-color);
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(126, 0, 255, 0.2);
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+
+    .gradient-text {
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .typing-text {
+      font-size: 1.3rem;
+      color: var(--text-sub);
+      font-weight: 700;
+      margin-bottom: 2rem;
+      height: 30px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: white;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(126, 0, 255, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-main);
+      border: 1px solid #E2E8F0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background: #f1f5f9;
+      transform: translateY(-3px);
+    }
+
+    .hero-img-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .profile-img-wrapper {
+      position: relative;
+      width: 340px;
+      height: 340px;
+    }
+
+    .profile-img-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: var(--primary-gradient);
+      border-radius: 50%;
+      z-index: -1;
+      filter: blur(15px);
+      opacity: 0.7;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid white;
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ==========================================
+       4. 섹션 공통 스타일
+       ========================================== */
+    section {
+      padding: 80px 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .section-subtitle {
+      color: var(--text-sub);
+      font-size: 1rem;
+    }
+
+    /* ==========================================
+       5. 성격 & 강점 (Cards)
+       ========================================== */
+    .personality-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-gradient);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      display: inline-block;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .card-desc {
+      color: var(--text-sub);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       6. 학력 및 자격사항 (Timeline & Badges)
+       ========================================== */
+    .info-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .info-block {
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .info-block-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timeline {
+      list-style: none;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      bottom: 5px;
+      width: 2px;
+      background: #E2E8F0;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.8rem;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      border: 3px solid white;
+      box-shadow: 0 0 0 2px var(--accent-color);
+    }
+
+    .timeline-date {
+      font-size: 0.85rem;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+
+    .timeline-heading {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 4px 0;
+    }
+
+    .timeline-sub {
+      color: var(--text-sub);
+      font-size: 0.9rem;
+    }
+
+    .cert-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .cert-badge {
+      background: rgba(126, 0, 255, 0.05);
+      border: 1px solid rgba(126, 0, 255, 0.15);
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ==========================================
+       7. 경력 & 기술 스택 (Skills & Projects)
+       ========================================== */
+    .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: #E2E8F0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--primary-gradient);
+      border-radius: 10px;
+    }
+
+    /* ==========================================
+       8. 푸터 & 연락처
+       ========================================== */
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 60px 1.5rem 30px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-socials a {
+      color: white;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .footer-socials a:hover {
+      color: #00F0FF;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      border-top: 1px solid #1e293b;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    /* ==========================================
+       9. 모바일 반응형 미디어 쿼리
+       ========================================== */
+    @media (max-width: 992px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 120px;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .info-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.2rem;
+      }
+
+      .profile-img-wrapper {
+        width: 260px;
+        height: 260px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3rem;
+        transition: 0.3s ease;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .nav-links.active {
+        left: 0;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">SIWOO.DEV</a>
+      <button class="mobile-menu-btn" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" onclick="toggleMenu()">소개</a></li>
+        <li><a href="#personality" onclick="toggleMenu()">성격</a></li>
+        <li><a href="#education" onclick="toggleMenu()">학력/자격</a></li>
+        <li><a href="#skills" onclick="toggleMenu()">기술/경력</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">연락처</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="badge">✨ AI·SW Global Leader</span>
+      <h1 class="hero-title">안녕하세요! <br><span class="gradient-text">윤시우</span>입니다. 🚀</h1>
+      <div class="typing-text" id="typing"></div>
+      <p style="color: var(--text-sub); margin-bottom: 2rem;">
+        한신대학교 AI·SW대학에서 창의적인 아이디어를 유연하고 완성도 높은 코드로 구현하는 웹 프로그래머를 꿈꾸고 있습니다.
+      </p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> 연락하기</a>
+        <a href="#skills" class="btn btn-secondary"><i class="fa-solid fa-code"></i> 스킬 보기</a>
+      </div>
+    </div>
+    <div class="hero-img-container">
+      <div class="profile-img-wrapper">
+        <!-- 상업적 무료 라이선스 고화질 프로필 이미지 (Unsplash) -->
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="윤시우 프로필 사진" class="profile-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Personality Section -->
+  <section id="personality">
+    <div class="section-header">
+      <h2 class="section-title">Personality & Traits <span class="gradient-text">#성격</span></h2>
+      <p class="section-subtitle">저를 더욱 세련되고 특별하게 만들어주는 핵심 강점입니다.</p>
+    </div>
+    <div class="personality-grid">
+      <div class="card">
+        <span class="card-icon">🔥</span>
+        <h3 class="card-title">화려하고 끈기있는 열정</h3>
+        <p class="card-desc">새로운 프레임워크나 최신 트렌드 기술을 학습할 때 두려움 없이 적극적으로 도전하며, 끝까지 최상의 결과물을 만들어냅니다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">✨</span>
+        <h3 class="card-title">깔끔하고 세련된 디테일</h3>
+        <p class="card-desc">사용자 중심의 가독성 높고 세련된 UI/UX 구현을 선호합니다. 코드 하나도 깔끔하고 구조적으로 가꾸는 것을 좋아합니다.</p>
+      </div>
+      <div class="card">
+        <span class="card-icon">🤝</span>
+        <h3 class="card-title">밝고 긍정적인 협업 능력</h3>
+        <p class="card-desc">팀 내에서 친근하고 밝은 분위기 메이커 역할을 수행하며, 원활한 커뮤니케이션으로 함께 성장하는 시너지를 만들어냅니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education & Certifications Section -->
+  <section id="education">
+    <div class="section-header">
+      <h2 class="section-title">Education & Credentials <span class="gradient-text">#학력 및 자격</span></h2>
+      <p class="section-subtitle">배움과 도전을 통해 꾸준히 가치를 증명해 나가고 있습니다.</p>
+    </div>
+    <div class="info-container">
+      <!-- 학력 -->
+      <div class="info-block">
+        <h3 class="info-block-title"><i class="fa-solid fa-graduation-cap gradient-text"></i> 학력 (Education)</h3>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="timeline-date">2023 - 현재</span>
+            <h4 class="timeline-heading">한신대학교 (Hanshin University)</h4>
+            <p class="timeline-sub">AI·SW대학 재학 중 (웹프로그래밍 수강)</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-date">2020 - 2023</span>
+            <h4 class="timeline-heading">OO고등학교 졸업</h4>
+            <p class="timeline-sub">이공계열 전공 기초 이수</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 자격증 -->
+      <div class="info-block">
+        <h3 class="info-block-title"><i class="fa-solid fa-certificate gradient-text"></i> 자격증 (Certifications)</h3>
+        <div class="cert-tags">
+          <div class="cert-badge">📜 SQLD (SQL 개발자)</div>
+          <div class="cert-badge">💻 정보처리기능사</div>
+          <div class="cert-badge">🐍 COS Pro Python 1급</div>
+          <div class="cert-badge">📊 컴퓨터활용능력 1급</div>
+          <div class="cert-badge">🌐 Web Publishing Cert</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills & Experience Section -->
+  <section id="skills">
+    <div class="section-header">
+      <h2 class="section-title">Skills & Experience <span class="gradient-text">#기술 및 경력</span></h2>
+      <p class="section-subtitle">웹프로그래밍 수업 및 학과 프로젝트 경험을 바탕으로 발전하고 있습니다.</p>
+    </div>
+    <div class="info-container">
+      <!-- 기술 스택 -->
+      <div class="info-block">
+        <h3 class="info-block-title"><i class="fa-solid fa-laptop-code gradient-text"></i> 보유 기술 (Tech Stack)</h3>
+        <div class="skill-list">
+          <div>
+            <div class="skill-info"><span>HTML5 / CSS3</span><span>90%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 90%;"></div></div>
+          </div>
+          <div>
+            <div class="skill-info"><span>JavaScript (ES6+)</span><span>80%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 80%;"></div></div>
+          </div>
+          <div>
+            <div class="skill-info"><span>Python & Data Analysis</span><span>75%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 75%;"></div></div>
+          </div>
+          <div>
+            <div class="skill-info"><span>Git & GitHub</span><span>85%</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 경력 및 프로젝트 -->
+      <div class="info-block">
+        <h3 class="info-block-title"><i class="fa-solid fa-rocket gradient-text"></i> 프로젝트 및 활동 경력</h3>
+        <ul class="timeline">
+          <li class="timeline-item">
+            <span class="timeline-date">2026.09 - 진행중</span>
+            <h4 class="timeline-heading">웹프로그래밍 개별 포트폴리오 프로젝트</h4>
+            <p class="timeline-sub">반응형 HTML/CSS/JS 기반 감각적 개인 브랜드 웹사이트 개발</p>
+          </li>
+          <li class="timeline-item">
+            <span class="timeline-date">2025.03 - 2025.12</span>
+            <h4 class="timeline-heading">AI·SW 학과 기술 스터디 리더</h4>
+            <p class="timeline-sub">알고리즘 및 기초 웹 인터페이스 구축 팀 프로젝트 주도</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <h2>윤시우와 함께할 비전을 기다립니다 💌</h2>
+      <p style="color: #cbd5e1;">한신대학교 AI·SW대학 소속 | 언제든 편하게 연락주세요!</p>
+      <div class="footer-socials">
+        <a href="mailto:siwoo@hanshin.ac.kr" title="Email"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://github.com" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      </div>
+      <p class="copyright">
+        &copy; 2026 Siwoo Yoon. All rights reserved. <br>
+        Built for Hanshin University Web Programming Class.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 1. 모바일 메뉴 토글
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    function toggleMenu() {
+      if (window.innerWidth <= 768) {
+        navLinks.classList.remove('active');
+      }
+    }
+
+    // 2. 히어로 섹션 글자 타이핑 효과
+    const typingElement = document.getElementById('typing');
+    const words = ["한신대학교 AI·SW대학 윤시우입니다.", "화려하고 세련된 웹을 선호합니다.", "디테일에 강한 개발자입니다."];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+      
+      if (isDeleting) {
+        typingElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typingElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let speed = isDeleting ? 50 : 100;
+
+      if (!isDeleting && charIndex === currentWord.length) {
+        speed = 2000; // 완료 후 대기 시간
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        wordIndex = (wordIndex + 1) % words.length;
+        speed = 500;
+      }
+
+      setTimeout(typeEffect, speed);
+    }
+
+    // 페이지 로드 후 타이핑 시작
+    document.addEventListener('DOMContentLoaded', typeEffect);
+  </script>
+</body>
+</html>
